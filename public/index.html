@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<!-- 	
+	This file is rendered by express.js, when the home url of the chat is opened in a browser.
+	It doesn't do much, except showing the create button for the chat.
+ -->
+
+<html ng-app="flapperNews">
+
+<head>
+
+	<title>Gotcha!</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+    <script src="../javascripts/angular.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link rel="shortcut icon" href="/images/pencil.png">
+    <link href="http://fonts.googleapis.com/css?family=Pacifico|Open+Sans:300,400,700" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-route.min.js"></script>
+	<link rel="shortcut icon" href="/images/pencil.png">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-animate.min.js"></script>
+	<script src="http://bouil.github.io/angular-google-chart/ng-google-chart.js"></script>
+
+	<style>
+		#gotchaHeading
+		{
+			position: absolute;;
+			font-family: Pacifico; 
+			text-align: center; 
+			font-size: 95px;
+			margin: 0px;
+			padding: 0px;
+			margin-top: 1px;
+			margin-left: 39.5%%;
+			color: #ecf0f1;
+		}
+
+		#className
+		{
+			border-radius: 3px;
+		}
+
+	</style>
+
+</head>
+
+<!-- POTENTIAL BACKGROUND COLORS
+rgb(13,89,144) 
+#ecf0f1
+-->
+
+<body>
+	<div class="{{whichView}}" ng-view> </div>
+
+	
+</body>
+</html>

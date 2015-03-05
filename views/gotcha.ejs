@@ -1,0 +1,150 @@
+<html ng-app="flapperNews">
+<head>
+	<title>Gotcha!</title>
+	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+    <script src="/javascripts/angular.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link rel="shortcut icon" href="/images/pencil.png">
+    <link href="http://fonts.googleapis.com/css?family=Pacifico|Open+Sans:300,400,700" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-route.min.js"></script>
+
+    <style type="text/css">
+
+    	a a:hover
+    	{
+    		text-decoration: none;
+    	}
+
+    	.button
+    	{
+    		padding: 17px 27px;
+			border-radius: 3px;
+			font-weight: 700;
+			font-size: 40px;
+			font-family: 'Open Sans';
+			text-transform: uppercase;
+			cursor: pointer;
+			width: 320px;
+			height: 100px;
+			text-align: center;
+			transition: .4s ease;
+			display: inline-block;
+			margin-right: 10px;
+    	}
+
+    	.buttonFuzzy
+		{
+			border: 1px solid #f15f5d;
+			color: #f15f5d;
+		}
+
+		.buttonGotcha
+		{
+			border: 1px solid #70b1d1;
+			color: #70b1d1;
+		}
+
+		.buttonGotcha:hover
+		{
+			background-color: #70b1d1;
+			color: white;
+		}
+
+		.buttonFuzzy:hover
+		{
+			background-color: #f15f5d;
+			color: white;
+		}
+
+		.gotcha
+		{
+			margin-left: 27%;
+			margin-top: 3%;
+		}
+
+		.classData
+		{
+			font-size: 3em;
+			margin-top: 4%;
+			text-align: center;
+		}
+
+		.topCorner
+		{
+			position: absolute;
+			top: 0;
+			right: 0;
+			margin-top: 27px;
+			margin-right: 10px;
+			padding: 17px 27px;
+			border-radius: 3px;
+			font-size: 15px;
+			font-weight: 800;
+			font-family: 'Open Sans';
+			text-transform: uppercase;
+			cursor: pointer;
+			text-align: center;
+			transition: .2s ease;
+			border: 1px solid rgb(7, 7, 123);
+			color: rgb(7, 7, 123);
+		}
+
+		.topCorner:hover
+		{
+			background-color: rgb(7, 7, 123);
+			color: white;
+		}
+
+    </style>
+
+
+</head>
+<body>
+	<div class="page-header">
+		<h1 style="text-align: center; font-family: Helvetica"><%= groupName%> Classroom Data</h1>
+	</div>
+	<div class="gotcha">
+		<div class="button buttonFuzzy">
+			Still Fuzzy?
+		</div>
+		<div class="button buttonGotcha">
+			Gotcha!
+		</div>
+	</div>
+
+	<div class="classData">
+		<p class="gotchaCount"> Yes: 0</p> 
+		<p class="fuzzyCount"> No: 0</p> 
+	</div>
+
+	<div class="topCorner">
+		<a href="#/questions">
+		Questions?
+		</a>
+	</div>
+	
+	<script>
+		var room = <%- JSON.stringify(groupName) %>;
+		var socket = io.connect(window.location.hostname + ':1337');
+		socket.emit('subscribe', room);
+		$('.buttonFuzzy').click(function(){
+			socket.emit('fuzzy', room);
+		});
+		$('.buttonGotcha').click(function(){
+			socket.emit('gotcha', room);
+		});
+
+		socket.on('fuzzyCount', function(count){
+			$('.fuzzyCount').text("No: " + count);
+		});
+		socket.on('gotchaCount', function(count){
+			$('.gotchaCount').text("Yes: " + count);
+		});
+
+	</script>
+
+</body>
+</html>

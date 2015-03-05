@@ -1,0 +1,85 @@
+<html>
+<head>
+	<title>Gotcha!</title>
+	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+    <script src="../javascripts/angular.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link rel="shortcut icon" href="/images/pencil.png">
+    <link href="../stylesheets/style.css" rel="stylesheet" type="text/css">
+    
+</head>
+<body>
+	<div id="liveFeed">
+		<div class="row">
+    		<div class="col-md-5 col-sm-5 col-md-offset-1 col-sm-offset-1">
+    			<div class="page-heade">
+					<h1 class="heading1">{{getClass.room}} Live Question Feed</h1>
+				</div>
+				<hr>
+				<form ng-submit="addPost()" style="margin-top:30px;" class="postQ">
+			        <h3 class="heading3">Add or Search for a Question</h3>
+			        <div class="form-group">
+			        	<input type="text" id="inputQ" class="inputField questionInput" placeholder="Question" ng-model="title">
+			        </div>
+			    
+			    	<div ng-click="addPost()" class="postButton">Post</div>
+
+			    	<div class="inputGlyph">
+			   			<input class="inputField searchInput" placeholder="Search" ng-model="search" type="search"></input>
+			    		<span class="glyphicon glyphicon-search searchGlyph"></span> 		
+			    	</div>
+			   
+			    </form>
+
+				<div ng-repeat="post in posts.array | orderBy: '-upvotes' | filter:search" class="questionPost">
+					<span class="allPosts">
+						{{post.title}}
+					</span>
+
+					<span class="numUps">
+						{{post.upvotes}}	
+					</span>
+
+					<span class="glyphicon glyphicon-arrow-up upvotePost" ng-click="incrementPost(post)"></span>
+					 
+				</div>
+		    </div>
+
+		    <div class="col-md-5 col-sm-5 col-md-offset-1 col-sm-offset-1 gotchaData" >
+      			<h1 class="heading1">{{getClass.room}} Statistics</h1>
+      			<hr>
+
+  				<div class="button buttonFuzzy" ng-click="addFuzzy()">
+					Still Fuzzy?
+				</div>
+				<div class="button buttonGotcha" ng-click="addGotcha()">
+					Gotcha!
+				</div>
+
+				<div google-chart chart="chartObject"></div>
+
+      		</div>
+
+      		<div class="backHome button">
+      			<a href="#/home">Home</a>
+      		</div>
+
+      	</div>
+    </div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

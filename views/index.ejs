@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<!-- 	
+	This file is rendered by express.js, when the home url of the chat is opened in a browser.
+	It doesn't do much, except showing the create button for the chat.
+ -->
+
+<html ng-app="flapperNews">
+
+<head>
+
+	<title>Gotcha!</title>
+
+	<link type="text/css" rel="stylesheet" href="/stylesheets/style.css" />
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans Condensed:300italic,300,700" rel="stylesheet" type="text/css">
+	<link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+	<script src="/socket.io/socket.io.js"></script>
+	<link rel="shortcut icon" href="/images/pencil.png">
+	
+
+	
+	<style>
+		#gotchaHeading
+		{
+			position: absolute;;
+			font-family: Pacifico; 
+			text-align: center; 
+			font-size: 95px;
+			margin: 0px;
+			padding: 0px;
+			margin-top: 1px;
+			margin-left: 39.5%%;
+		}
+
+		#className
+		{
+			border-radius: 3px;
+		}
+
+	</style>
+
+</head>
+
+<body style="background-color: white; margin-top: 100px">
+
+	<div ng-view> </div>
+
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+	<script>
+			// var socket = io.connect();
+			// $('#create').click(function(){
+			// 	if(!$('.input').val()) {return;}
+			// 	$('.classGroup').submit();
+			// });
+	</script>
+
+</body>
+</html>

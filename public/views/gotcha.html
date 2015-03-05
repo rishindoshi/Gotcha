@@ -1,0 +1,63 @@
+<html>
+<head>
+	<title>Gotcha!</title>
+	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../stylesheets/style.css" rel="stylesheet" type="text/css">
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+    <script src="../javascripts/angular.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link rel="shortcut icon" href="/images/pencil.png">
+    <link href="http://fonts.googleapis.com/css?family=Pacifico|Open+Sans:300,400,700" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-route.min.js"></script>
+   
+</head>
+<body>
+		<div class="page-header">
+			<h1>{{getClass.room}} Classroom Data</h1>
+		</div>
+		
+		<div class="gotcha">
+			<div class="button buttonFuzzy" ng-click="addFuzzy()">
+				Still Fuzzy?
+			</div>
+			<div class="button buttonGotcha" ng-click="addGotcha()">
+				Gotcha!
+			</div>
+		</div>
+
+		<div class="classData">
+			<p class="gotchaCount"> Yes: {{classCounts.gotchaCount}}</p> 
+			<p class="fuzzyCount"> No: {{classCounts.fuzzyCount}}</p> 
+		</div>
+
+		<div class="topCorner">
+			<a href="#/questions">
+			Questions?
+			</a>
+		</div>
+	
+	
+	<script>
+		var room = <%- JSON.stringify(groupName) %>;
+		var socket = io.connect(window.location.hostname + ':1337');
+		socket.emit('subscribe', room);
+		$('.buttonFuzzy').click(function(){
+			socket.emit('fuzzy', room);
+		});
+		$('.buttonGotcha').click(function(){
+			socket.emit('gotcha', room);
+		});
+
+		socket.on('fuzzyCount', function(count){
+			$('.fuzzyCount').text("No: " + count);
+		});
+		socket.on('gotchaCount', function(count){
+			$('.gotchaCount').text("Yes: " + count);
+		});
+
+	</script>
+
+</body>
+</html>
