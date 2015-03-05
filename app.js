@@ -26,7 +26,8 @@ var gotchaData = [];
 
 //DB set up stuff
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/classRooms');
+// mongoose.connect('mongodb://localhost/classRooms');
+mongoose.connect('mongodb://rishdosh:Moniter123@ds049661.mongolab.com:49661/gotcha');
 var ClassRoom = require('./models/Class');
 
 //Serve home page on App load
